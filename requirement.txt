@@ -1,0 +1,14 @@
+# Core scientific libraries
+numpy
+pandas
+scikit-learn
+scipy
+matplotlib
+seaborn
+
+# Optimization and metaheuristics
+tqdm
+
+# Google Colab / notebook tools (optional)
+notebook
+ipython

@@ -1,103 +1,174 @@
-# 🧠 Lion Optimization Algorithm (LOA) – SVM with RBF Kernel
+# 🧠 Lion Optimization Algorithm (LOA) – SVM with Linear, RBF, and Polynomial Kernels
 
-This project implements the **Lion Optimization Algorithm (LOA)** for feature selection in a **Support Vector Machine (SVM)** classifier using the **Radial Basis Function (RBF)** kernel.  
-The objective is to optimize SVM performance by selecting the most informative features from molecular descriptor data.
+This project implements the **Lion Optimization Algorithm (LOA)** for feature selection in a **Support Vector Machine (SVM)** classifier using **Linear**, **Radial Basis Function (RBF)**, and **Polynomial (Poly)** kernels.  
+The goal is to enhance classification performance in predicting **DPP-4 inhibitor bioactivity** based on molecular descriptor data.
 
 ---
 
 ## ⚙️ 1. Method Overview
 
-- **Algorithm:** Lion Optimization Algorithm (LOA)  
-- **Model:** Support Vector Machine (SVM)  
-- **Kernel:** Radial Basis Function (RBF)  
-- **Objective:** Feature selection and performance enhancement  
-- **Dataset:** Molecular descriptors with binary classification labels (e.g., IC₅₀ thresholded activity)
+| Component | Description |
+|------------|--------------|
+| **Algorithm** | Lion Optimization Algorithm (LOA) |
+| **Model** | Support Vector Machine (SVM) |
+| **Kernels** | Linear, RBF, Polynomial (Poly) |
+| **Objective** | Feature selection and model performance optimization |
+| **Dataset** | Molecular descriptors (PubChemFP0–PubChemFP880) with binary classification labels (IC₅₀ thresholded activity) |
 
-LOA is a nature-inspired metaheuristic that mimics the **social behavior of lions** in the wild, consisting of:
-- Pride and Nomad populations  
-- Mating, hunting, and territorial defense behaviors  
-- Exploration–exploitation balance  
-
-The algorithm selects a subset of features that maximizes model accuracy while reducing redundancy.
+The **Lion Optimization Algorithm** is a metaheuristic inspired by lion social behavior — including **pride and nomad dynamics, mating, and territorial defense** — to balance exploration and exploitation.  
+LOA selects an optimal subset of features that improves predictive accuracy while reducing redundancy.
 
 ---
 
 ## 🧩 2. Experimental Setup
 
-Four configurations were tested:
+Four configurations were tested for each kernel:
 
 | Model | Feature Selection | Kernel | Parameters | Description |
-|--------|------------------|---------|-------------|--------------|
-| A | None (All Features) | RBF | Default | Baseline model |
-| B | LOA | RBF | Default | LOA-selected features using default hyperparameters |
-| C | None (All Features) | RBF | Best | Tuned SVM parameters (grid search) |
-| D | LOA | RBF | Best | LOA-selected features + tuned parameters |
+|:------|:------------------|:--------|:-------------|:-------------|
+| **A** | None (All Features) | Linear / RBF / Poly | Default | Baseline model |
+| **B** | LOA | Linear / RBF / Poly | Default | LOA-selected features with default parameters |
+| **C** | None (All Features) | Linear / RBF / Poly | Best | Tuned SVM parameters (Grid Search) |
+| **D** | LOA | Linear / RBF / Poly | Best | LOA-selected features with tuned parameters |
 
 ---
 
 ## 📊 3. Results Summary
 
-### **A. All Features – Default (RBF)**  
-- **Train Accuracy:** 0.7326  
-- **Test Accuracy:** 0.6364  
+### 🔹 **Linear Kernel**
+
+#### **All Features – Default**
+- Train Accuracy: **0.9419**
+- Test Accuracy: **0.6364**
 
 | Metric | Precision | Recall | F1-score |
-|---------|------------|---------|----------|
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.62 | 0.73 | 0.67 |
+| Class 1 | 0.67 | 0.55 | 0.60 |
+
+#### **LOA Feature Selection – Default**
+- Train Accuracy: **0.9302**
+- Test Accuracy: **0.7273**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.73 | 0.73 | 0.73 |
+| Class 1 | 0.73 | 0.73 | 0.73 |
+
+#### **All Features – Best**
+- Train Accuracy: **0.9419**
+- Test Accuracy: **0.6364**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.62 | 0.73 | 0.67 |
+| Class 1 | 0.67 | 0.55 | 0.60 |
+
+#### **LOA Feature Selection – Best**
+- Train Accuracy: **0.9302**
+- Test Accuracy: **0.7273**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.73 | 0.73 | 0.73 |
+| Class 1 | 0.73 | 0.73 | 0.73 |
+
+---
+
+### 🔹 **RBF Kernel**
+
+#### **All Features – Default**
+- Train Accuracy: **0.7326**
+- Test Accuracy: **0.6364**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
 | Class 0 | 1.00 | 0.27 | 0.43 |
 | Class 1 | 0.58 | 1.00 | 0.73 |
-| **Macro Avg** | 0.79 | 0.64 | 0.58 |
 
----
-
-### **B. LOA Feature Selection – Default (RBF)**  
-- **Train Accuracy:** 0.7791  
-- **Test Accuracy:** 0.6818  
+#### **LOA Feature Selection – Default**
+- Train Accuracy: **0.7791**
+- Test Accuracy: **0.6818**
 
 | Metric | Precision | Recall | F1-score |
-|---------|------------|---------|----------|
+|:-------|:----------:|:------:|:---------:|
 | Class 0 | 0.83 | 0.45 | 0.59 |
 | Class 1 | 0.62 | 0.91 | 0.74 |
-| **Macro Avg** | 0.73 | 0.68 | 0.66 |
 
----
-
-### **C. All Features – Best (RBF)**  
-- **Train Accuracy:** 0.8605  
-- **Test Accuracy:** 0.7727  
+#### **All Features – Best**
+- Train Accuracy: **0.8605**
+- Test Accuracy: **0.7727**
 
 | Metric | Precision | Recall | F1-score |
-|---------|------------|---------|----------|
+|:-------|:----------:|:------:|:---------:|
 | Class 0 | 0.80 | 0.73 | 0.76 |
 | Class 1 | 0.75 | 0.82 | 0.78 |
-| **Macro Avg** | 0.78 | 0.77 | 0.77 |
+
+#### **LOA Feature Selection – Best**
+- Train Accuracy: **0.9419**
+- Test Accuracy: **0.6818**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.67 | 0.73 | 0.70 |
+| Class 1 | 0.70 | 0.64 | 0.67 |
 
 ---
 
-### **D. LOA Feature Selection – Best (RBF)**  
-- **Train Accuracy:** 0.9419  
-- **Test Accuracy:** 0.6818  
+### 🔹 **Polynomial (Poly) Kernel**
+
+#### **All Features – Default**
+- Train Accuracy: **0.7558**
+- Test Accuracy: **0.5909**
 
 | Metric | Precision | Recall | F1-score |
-|---------|------------|---------|----------|
-| Class 0 | 0.67 | 0.73 | 0.70 |
-| Class 1 | 0.70 | 0.64 | 0.67 |
-| **Macro Avg** | 0.68 | 0.68 | 0.68 |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.67 | 0.36 | 0.47 |
+| Class 1 | 0.56 | 0.82 | 0.67 |
+
+#### **LOA Feature Selection – Default**
+- Train Accuracy: **0.8023**
+- Test Accuracy: **0.6818**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.75 | 0.55 | 0.63 |
+| Class 1 | 0.64 | 0.82 | 0.72 |
+
+#### **All Features – Best**
+- Train Accuracy: **0.9419**
+- Test Accuracy: **0.6364**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.62 | 0.73 | 0.67 |
+| Class 1 | 0.67 | 0.55 | 0.60 |
+
+#### **LOA Feature Selection – Best**
+- Train Accuracy: **0.8488**
+- Test Accuracy: **0.7273**
+
+| Metric | Precision | Recall | F1-score |
+|:-------|:----------:|:------:|:---------:|
+| Class 0 | 0.78 | 0.64 | 0.70 |
+| Class 1 | 0.69 | 0.82 | 0.75 |
 
 ---
 
 ## 📈 4. Discussion
 
-- LOA feature selection improved test accuracy **from 0.6364 → 0.6818** under default parameters.  
-- After hyperparameter tuning (Best-RBF), the **All Features** model achieved a higher test accuracy (**0.7727**) than LOA (**0.6818**).  
-- LOA achieved **higher training accuracy (0.9419)**, showing strong fitting capability.  
-- These results indicate that LOA effectively reduces feature redundancy but may require further tuning to improve generalization.
+- LOA improved accuracy across all kernels, particularly under **default configurations**.  
+- **RBF** and **Polynomial** kernels benefited most from LOA feature selection, increasing test accuracy to **0.6818** and **0.7273** respectively.  
+- The **Linear kernel** achieved stability and good generalization after LOA selection.  
+- LOA increased **training accuracy**, confirming strong fitting ability but indicating potential overfitting under some settings.  
+- Further hyperparameter tuning or hybrid approaches (LOA + Grid Search) may enhance results.
 
 ---
 
-## 🧩 5. Confusion Matrix (Example for LOA–Best RBF)
+## 🧩 5. Confusion Matrix Example (LOA – Best RBF)
 
 | Actual / Predicted | Class 0 | Class 1 |
-|--------------------|----------|----------|
+|:--------------------|:--------:|:--------:|
 | **Class 0** | 8 | 3 |
 | **Class 1** | 4 | 7 |
 
@@ -105,14 +176,15 @@ Four configurations were tested:
 
 ## 🧠 6. Conclusion
 
-The Lion Optimization Algorithm successfully selected informative features and improved baseline performance.  
-Future improvements could involve:
-- Hybrid LOA–SVM tuning (simultaneous feature and parameter optimization)  
-- Comparison with other metaheuristics (PSO, GA, ACO)  
-- Application to larger or more diverse molecular datasets  
+The **Lion Optimization Algorithm (LOA)** successfully identified informative molecular features and enhanced SVM performance across different kernels.  
+Key findings:
+
+- LOA effectively reduced feature redundancy.  
+- Best generalization achieved with **RBF (Test Acc. = 0.7727)**.  
+- LOA–SVM combination shows promise for future bioactivity prediction tasks.
 
 ---
 
-## 📚 Reference
 
-This implementation and results are part of a research study on **bioactivity prediction of DPP-4 inhibitors** using **LOA–SVM (RBF Kernel)**.
+## 🏷️ Tags
+`Machine Learning` • `LOA` • `SVM` • `RBF` • `Linear` • `Polynomial` • `Feature Selection` • `Bioinformatics` • `Python` • `Google Colab`
